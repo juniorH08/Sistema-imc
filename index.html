@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 96%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Calculadora de IMC</h1>
+
+        <p>Digite seu peso e sua altura:</p>
+
+        <input type="number" id="peso" placeholder="Peso em kg">
+
+        <input type="number" id="altura" placeholder="Altura em metros">
+
+        <button onclick="calcularIMC()">Calcular IMC</button>
+
+        <div id="resultado"></div>
+
+    </div>
+
+    <script>
+        function calcularIMC() {
+
+            // Pega os valores digitados pelo usuário
+            let peso = Number(document.getElementById("peso").value);
+            let altura = Number(document.getElementById("altura").value);
+
+            // Verifica se os valores foram preenchidos
+            if (peso <= 0 || altura <= 0) {
+                document.getElementById("resultado").innerHTML =
+                    "Digite um peso e uma altura válidos!";
+                return;
+            }
+
+            // Calcula o IMC
+            let imc = peso / (altura * altura);
+
+            let classificacao = "";
+
+            // Verifica a classificação
+            if (imc < 18.5) {
+                classificacao = "Abaixo do peso";
+            } 
+            else if (imc < 25) {
+                classificacao = "Peso normal";
+            } 
+            else if (imc < 30) {
+                classificacao = "Sobrepeso";
+            } 
+            else {
+                classificacao = "Obesidade";
+            }
+
+            // Mostra o resultado
+            document.getElementById("resultado").innerHTML =
+                "Seu IMC é: <strong>" + imc.toFixed(2) +
+                "</strong><br>Classificação: <strong>" +
+                classificacao + "</strong>";
+        }
+    </script>
+
+</body>
+</html>
